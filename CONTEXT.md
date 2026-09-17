@@ -9,7 +9,7 @@
 _Avoid_: Polis Shop（无连字符的品牌写法若未统一则避免混用）
 
 **polis-shop**:
-uni-app 仓库：App 壳、原生能力，以及少量原生页面。
+uni-app 仓库：App 壳、原生能力，以及壳宿主页。
 _Avoid_: H5 工程、业务主界面仓库
 
 **polis-shop-h5**:
@@ -23,3 +23,7 @@ _Avoid_: 双端各写全套业务、纯 Web 包装分发
 **视图**:
 H5 侧由 Vue Router 挂载的页面级界面，源码位于 `src/views`。
 _Avoid_: page、pages（保留给 uni-app 页面体系）
+
+**壳宿主页**:
+壳内仅用于承载 web-view 与系统 Tab 切换的 uni-app 页面；业务界面不在此实现。
+_Avoid_: 业务页、H5 视图
