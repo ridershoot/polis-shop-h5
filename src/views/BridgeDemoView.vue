@@ -87,8 +87,11 @@ onMounted(() => {
 <template>
   <div class="flex min-h-dvh flex-col bg-neutral-50 text-neutral-900">
     <header
-      class="sticky top-0 z-10 flex items-center gap-3 border-b border-neutral-200 bg-white/95 px-3 py-3 backdrop-blur"
-      style="padding-top: max(0.75rem, env(safe-area-inset-top))"
+      class="sticky top-0 z-10 flex items-center gap-3 border-b border-neutral-200 bg-white/95 px-3 pb-3 backdrop-blur"
+      style="
+        padding-top: calc(constant(safe-area-inset-top));
+        padding-top: calc(env(safe-area-inset-top, 0px));
+      "
     >
       <button
         type="button"
