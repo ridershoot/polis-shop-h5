@@ -58,7 +58,7 @@ async function onGetAppInfo() {
 async function onOpenSelfAgain() {
   busy.value = true
   try {
-    const url = `${window.location.origin}/bridge-demo?from=openPage`
+    const url = `${window.location.origin}${import.meta.env.BASE_URL}bridge-demo?from=openPage`
     const result = await openPage(url)
     appendLog(`openPage → ${JSON.stringify(result)} url=${url}`)
   } catch (error) {

@@ -23,7 +23,7 @@ async function openBridgeDemo() {
   if (opening.value) return
   opening.value = true
   hint.value = ''
-  const url = `${window.location.origin}/bridge-demo`
+  const url = `${window.location.origin}${import.meta.env.BASE_URL}bridge-demo`
   try {
     if (hasPolisShopUserAgent()) {
       await waitForBridge(8000)
