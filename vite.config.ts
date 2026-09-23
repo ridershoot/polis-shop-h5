@@ -8,7 +8,11 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 
 // https://vite.dev/config/
+// GitHub Pages project site: https://ridershoot.github.io/polis-shop-h5/
+const pagesBase = process.env.GITHUB_PAGES === 'true' ? '/polis-shop-h5/' : '/'
+
 export default defineConfig({
+  base: pagesBase,
   plugins: [
     vue(),
     vueDevTools(),
