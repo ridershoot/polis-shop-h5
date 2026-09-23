@@ -24,11 +24,24 @@ export interface OpenPageResult {
   ok: boolean
 }
 
+export interface ShareLinkParams {
+  title: string
+  summary?: string
+  href: string
+  imageUrl?: string
+}
+
+export interface ShareLinkResult {
+  ok: boolean
+  reason?: 'cancelled' | 'failed' | 'invalid_params'
+}
+
 export interface PolisShopBridge {
   __ready: true
   getAppInfo: () => Promise<AppInfo>
   openPage: (url: string) => Promise<OpenPageResult>
   closePage: () => Promise<ClosePageResult>
+  shareLink: (params: ShareLinkParams) => Promise<ShareLinkResult>
 }
 
 declare global {

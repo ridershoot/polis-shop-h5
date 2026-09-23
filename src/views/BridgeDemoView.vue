@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import { closePage, getAppInfo, openPage, waitForBridge } from '@/bridge/client'
+import { closePage, getAppInfo, openPage, shareLink, waitForBridge } from '@/bridge/client'
 import { hasPolisShopUserAgent, isInApp } from '@/bridge/detect'
-import type { AppInfo } from '@/bridge/types'
+import type { AppInfo, ShareLinkParams } from '@/bridge/types'
+
+const SHARE_DEMO: ShareLinkParams = {
+  title: '韓流潮牌 Wacky WiLLy 首度空降台南！台南限定打卡牆、TOYSELECT 聯名登場',
+  summary: '韓國人氣潮流品牌 Wacky WiLLy 2026 年 9 月 18 日於台南首度推出南台灣全新旗艦概念店！',
+  href: 'https://www.cool-style.com.tw/wd2/archives/1345028',
+  imageUrl: 'https://cdn-origin.cool-style.com.tw/cool/2026/09/collage.jpg',
+}
 
 const log = ref('')
 const inApp = ref(false)
@@ -78,6 +85,19 @@ async function onBack() {
   }
 }
 
+async function onShareLink() {
+  busy.value = true
+  try {
+    appendLog(`shareLink request imageUrl=${SHARE_DEMO.imageUrl}（壳侧 v1 忽略图片）`)
+    const result = await shareLink(SHARE_DEMO)
+    appendLog(`shareLink → ${JSON.stringify(result)}`)
+  } catch (error) {
+    appendLog(`shareLink failed: ${error instanceof Error ? error.message : String(error)}`)
+  } finally {
+    busy.value = false
+  }
+}
+
 onMounted(() => {
   refreshDetect()
   void ensureBridge()
@@ -133,6 +153,14 @@ onMounted(() => {
           @click="onOpenSelfAgain"
         >
           openPage（再开一层调试页）
+        </button>
+        <button
+          type="button"
+          class="rounded-lg border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium disabled:opacity-50"
+          :disabled="busy"
+          @click="onShareLink"
+        >
+          shareLink（系统链接分享）
         </button>
         <pre
           v-if="appInfo"

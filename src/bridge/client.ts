@@ -1,4 +1,4 @@
-import type { PolisShopBridge } from './types'
+import type { PolisShopBridge, ShareLinkParams } from './types'
 
 const READY_EVENT = 'PolisShopBridgeReady'
 
@@ -57,4 +57,9 @@ export async function openPage(url: string) {
 export async function closePage() {
   const bridge = await waitForBridge()
   return bridge.closePage()
+}
+
+export async function shareLink(params: ShareLinkParams) {
+  const bridge = await waitForBridge()
+  return bridge.shareLink(params)
 }
